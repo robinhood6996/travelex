@@ -8,22 +8,21 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 // import Swiper core and required modules
 import SwiperCore, {
-    Autoplay, Pagination, Navigation, Parallax
+    Autoplay, Pagination, Navigation
 } from 'swiper';
-//Images
-import b1 from '../../../Images/carousel/1.jpg';
+
 
 
 
 
 
 // install Swiper modules
-SwiperCore.use([Autoplay, Pagination, Navigation, Parallax]);
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 const Carousel = () => {
     return (
         <>
-            <Swiper spaceBetween={30} centeredSlides={true} parallax={true} autoplay={{
+            <Swiper spaceBetween={30} centeredSlides={true} autoplay={{
                 "delay": 2500,
                 "disableOnInteraction": false
             }} pagination={{

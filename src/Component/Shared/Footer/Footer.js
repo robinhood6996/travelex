@@ -2,8 +2,8 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
-            <div class=" container mx-auto grid md:grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
+        <div className='border-t-2'>
+            <div className=" container mx-auto grid md:grid-cols-1 lg:grid-cols-3 gap-4 mt-2 ">
                 <div className='p-5'>
                     <div className="logo">
                         <h2 className='text-4xl text-violet-500 font-extrabold '>Travelex</h2>
