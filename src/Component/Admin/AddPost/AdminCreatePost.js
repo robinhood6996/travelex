@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
-const CreatePost = () => {
+import React, { useState } from 'react';
+import useAuth from '../../../Hooks/useAuth';
+
+const AdminCreatePost = () => {
     const { user, loading } = useAuth();
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
@@ -11,7 +12,7 @@ const CreatePost = () => {
     const [rating, setRating] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
-    const [author, setAuthor] = useState(user.displayName);
+    const [author, setAuthor] = useState(null);
 
     const handleAddBlog = (e) => {
         e.preventDefault();
@@ -24,7 +25,6 @@ const CreatePost = () => {
     if (loading) {
         return '';
     }
-
 
     return (
         <div className='container mx-auto py-10'>
@@ -119,6 +119,18 @@ const CreatePost = () => {
                                             />
                                         </div>
                                     </div>
+                                    <div className="col-span-6 sm:col-span-3">
+                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                            Traveller Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="author"
+                                            id="author"
+                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
+                                            onChange={e => setAuthor(e.target.value)}
+                                        />
+                                    </div>
                                     <div>
                                         <label htmlFor="about" className="block text-sm font-medium text-gray-700">
                                             Description
@@ -188,4 +200,4 @@ const CreatePost = () => {
     );
 };
 
-export default CreatePost;
+export default AdminCreatePost

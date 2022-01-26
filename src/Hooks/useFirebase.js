@@ -23,7 +23,7 @@ const useFirebase = () => {
                 const user = userCredential.user;
                 setUser(user);
                 // ...
-                // saveUser(username, email, 'POST');
+                saveUser(username, email, 'POST');
                 updateProfile(auth.currentUser, {
                     displayName: username,
                     email: email,
@@ -71,8 +71,9 @@ const useFirebase = () => {
                 // const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
+                // console.log(user)
                 setUser(user);
-                // saveUser(user.name, user.email, 'PUT');
+                saveUser(user.displayName, user.email, 'PUT');
                 setAuthError('');
                 const destination = location?.state?.from || '/';
                 history(destination);
@@ -113,21 +114,21 @@ const useFirebase = () => {
         }).finally(() => setIsLoading(false));
     }
 
-    // const saveUser = (email, displayName, phone, location, method) => {
-    //     const user = { email, displayName, phone, location }
-    //     fetch('https://ancient-ravine-11592.herokuapp.com/users', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
+    const saveUser = (displayName, email, method) => {
+        const user = { name: displayName, email: email }
+        fetch('http://localhost:5099/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
 
-    //         })
-
-    // }
+    }
 
     return {
         user,
