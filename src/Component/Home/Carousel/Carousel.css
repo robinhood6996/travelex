@@ -1,0 +1,18 @@
+.slide1{
+    background-image: url('../../../Images/carousel/1.jpg');
+    height: 100vh !important;
+    background-size: cover;
+    background-position-x: center;
+}
+.slide2{
+    background-image: url('../../../Images/carousel/2.jpg');
+    height: 100vh !important;
+    background-size: cover;
+    background-position-x: center;
+}
+.slide3{
+    background-image: url('../../../Images/carousel/3.jpg');
+    height: 100vh !important;
+    background-size: cover;
+    background-position-x: center;
+}
