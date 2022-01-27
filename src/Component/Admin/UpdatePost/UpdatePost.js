@@ -1,25 +1,30 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 
-const AdminCreatePost = () => {
+const UpdatePost = () => {
+    const { id } = useParams();
     const { loading } = useAuth();
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [budget, setBudget] = useState('');
-    const [date, setDate] = useState(null);
-    const [category, setCategory] = useState(null);
-    const [rating, setRating] = useState(0);
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState(null);
-    const [author, setAuthor] = useState(null);
+    const [blog, setBlog] = useState({});
+    const [title, setTitle] = useState(blog.title);
+    const [location, setLocation] = useState(blog.location);
+    const [budget, setBudget] = useState(blog.budget);
+    const [date, setDate] = useState(blog.date);
+    const [category, setCategory] = useState(blog.category);
+    const [rating, setRating] = useState(blog.rating);
+    const [description, setDescription] = useState(blog.description);
+    const [image, setImage] = useState(blog.image);
+    const [author, setAuthor] = useState(blog.author);
 
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blog = { title, location, budget, date, category, rating, description, author, image };
-        axios.post('http://localhost:5099/blogs/admin', blog)
+        axios.put(`http://localhost:5099/blog/update/${id}`, blog)
             .then(res => {
-                if (res.data.insertedId) {
+                if (res.data.matchedCount) {
                     e.target.value = '';
                     alert('Your blog has been Publish!')
                 } else {
@@ -33,6 +38,10 @@ const AdminCreatePost = () => {
             });
 
     }
+    useEffect(() => {
+        axios.get(`http://localhost:5099/blog/${id}`)
+            .then(res => setBlog(res.data))
+    }, [])
     if (loading) {
         return '';
     }
@@ -43,7 +52,7 @@ const AdminCreatePost = () => {
             <div className=''>
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
-                        <form onSubmit={handleAddBlog} action="#">
+                        <form action="#" onSubmit={handleAddBlog}>
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div className="grid grid-cols-6 gap-6">
@@ -55,6 +64,7 @@ const AdminCreatePost = () => {
                                                 type="text"
                                                 name="title"
                                                 id="title"
+                                                defaultValue={blog.title}
                                                 className="mt-1 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setTitle(e.target.value)}
                                                 required
@@ -69,6 +79,7 @@ const AdminCreatePost = () => {
                                                 type="text"
                                                 name="location"
                                                 id="location"
+                                                defaultValue={blog.location}
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setLocation(e.target.value)}
                                                 required
@@ -83,6 +94,7 @@ const AdminCreatePost = () => {
                                                 type="number"
                                                 name="budget"
                                                 id="budget"
+                                                defaultValue={blog.budget}
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setBudget(e.target.value)}
                                                 required
@@ -97,6 +109,7 @@ const AdminCreatePost = () => {
                                                 type="date"
                                                 name="date"
                                                 id="date"
+                                                defaultValue={blog.date}
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setDate(e.target.value)}
                                                 required
@@ -110,18 +123,19 @@ const AdminCreatePost = () => {
                                             <select
                                                 id="country"
                                                 name="country"
+
                                                 autoComplete="country-name"
                                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                 onChange={e => setCategory(e.target.value)}
                                                 required
                                             >
-                                                <option selected value="None">Select a Category</option>
-                                                <option value="Adventure Travel">Adventure Travel</option>
-                                                <option value="Family Holidays">Family Holidays</option>
-                                                <option value="Honeymoon & Romance">Honeymoon & Romance</option>
-                                                <option value="Travel on Budget">Travel on Budget</option>
-                                                <option value="Wildlife & Nature">Wildlife & Nature</option>
-                                                <option value="Road Trips">Road Trips</option>
+                                                <option value="None">Select a New Category</option>
+                                                <option defaultValue="Adventure Travel">Adventure Travel</option>
+                                                <option defaultValue="Family Holidays">Family Holidays</option>
+                                                <option defaultValue="Honeymoon & Romance">Honeymoon & Romance</option>
+                                                <option defaultValue="Travel on Budget">Travel on Budget</option>
+                                                <option defaultValue="Wildlife & Nature">Wildlife & Nature</option>
+                                                <option defaultValue="Road Trips">Road Trips</option>
                                             </select>
                                         </div>
 
@@ -133,6 +147,7 @@ const AdminCreatePost = () => {
                                                 type="number"
                                                 name="rating"
                                                 id="rating"
+                                                defaultValue={blog.rating}
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 max={5}
                                                 onChange={e => setRating(e.target.value)}
@@ -148,6 +163,7 @@ const AdminCreatePost = () => {
                                             type="text"
                                             name="author"
                                             id="author"
+                                            defaultValue={blog.author}
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                             onChange={e => setAuthor(e.target.value)}
                                             required
@@ -162,9 +178,9 @@ const AdminCreatePost = () => {
                                                 id="about"
                                                 name="about"
                                                 rows={3}
+                                                defaultValue={blog.description}
                                                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-800 rounded-md p-2"
                                                 placeholder="Description About Tour"
-                                                defaultValue={''}
                                                 onChange={e => setDescription(e.target.value)}
                                                 required
                                             />
@@ -180,6 +196,7 @@ const AdminCreatePost = () => {
                                             type="link"
                                             name="image"
                                             id="image"
+                                            defaultValue={blog.image}
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                             required
                                             onChange={e => setImage(e.target.value)}
@@ -204,4 +221,4 @@ const AdminCreatePost = () => {
     );
 };
 
-export default AdminCreatePost
+export default UpdatePost;

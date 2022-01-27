@@ -1,42 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ReactStars from "react-rating-stars-component";
 import { Link } from 'react-router-dom';
+import Rating from 'react-rating';
 
-const callouts = [
-    {
-        name: 'Desk and Office',
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cum autem minus similique accusamus hic necessitatibus beatae numquam labore, aspernatur quam dolor quaerat quia corporis facilis ipsum saepe repellendus, unde, sequi itaque esse error magni! Quod impedit accusamus id dolorem voluptate illum nesciunt quam atque optio, dolorum, quia aliquid praesentium.',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
-        imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-        href: '#',
-        author: 'Robin'
-    },
-    {
-        name: 'Self-Improvement',
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cum autem minus similique accusamus hic necessitatibus beatae numquam labore, aspernatur quam dolor quaerat quia corporis facilis ipsum saepe repellendus, unde, sequi itaque esse error magni! Quod impedit accusamus id dolorem voluptate illum nesciunt quam atque optio, dolorum, quia aliquid praesentium.',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
-        imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-        href: '#',
-        author: 'Robin'
-    },
-    {
-        name: 'Travel',
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cum autem minus similique accusamus hic necessitatibus beatae numquam labore, aspernatur quam dolor quaerat quia corporis facilis ipsum saepe repellendus, unde, sequi itaque esse error magni! Quod impedit accusamus id dolorem voluptate illum nesciunt quam atque optio, dolorum, quia aliquid praesentium.',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-        href: '#',
-        author: 'Robin'
-    },
-    {
-        name: 'Travel d',
-        description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cum autem minus similique accusamus hic necessitatibus beatae numquam labore, aspernatur quam dolor quaerat quia corporis facilis ipsum saepe repellendus, unde, sequi itaque esse error magni! Quod impedit accusamus id dolorem voluptate illum nesciunt quam atque optio, dolorum, quia aliquid praesentium.',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-        imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-        href: '#',
-        author: 'Robin'
-    },
-]
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([])
@@ -89,11 +55,7 @@ const Blogs = () => {
                                         <div className="rating">
                                             <h3 className='font-base text-sm'>Rating</h3>
                                             <h2 className='font-bold text-md text-violet-700'>
-                                                <ReactStars
-                                                    count={blog.rating}
-                                                    size={24}
-                                                    activeColor="#ffd700"
-                                                />
+                                                <Rating initialRating={blog.rating} emptySymbol="far fa-star text-yellow-500" fullSymbol="fas fa-star text-yellow-500" readonly />
                                             </h2>
                                         </div>
                                         <div className='mt-3 '>
@@ -110,11 +72,11 @@ const Blogs = () => {
                             <h2 className='mb-2 font-bold text-violet-500'>More Blogs..</h2>
                             {
                                 [...Array(pageCount).keys()]
-                                    .map(number => <><button
+                                    .map(number => <button
                                         className={number === page ? 'active mx-4 p-2 font-bold bg-violet-500 text-white ' : 'mx-4 p-2 font-bold bg-gray-500 text-white'}
                                         key={number}
                                         onClick={() => setPage(number)}
-                                    >{number + 1}</button></>)
+                                    >{number + 1}</button>)
                             }
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import image from '../../Images/carousel/2.jpg';
+import Rating from 'react-rating';
 const Blog = () => {
     const [blog, setBlog] = useState({});
     const { id } = useParams();
@@ -31,7 +31,7 @@ const Blog = () => {
                 </div>
                 <div className="budget grid grid-cols-2 mt-5">
                     <h2 className='font-semibold text-md text-gray-500'>Date: <span className='font-semibold text-lg'>{blog.date}</span></h2>
-                    {/* <h2 className='font-bold text-md text-black'>Location: <span className='text-violet-500'>London,UK</span></h2> */}
+                    <h2 className='font-bold text-md text-black'>Rating:    <Rating initialRating={blog.rating} emptySymbol="far fa-star text-yellow-500" fullSymbol="fas fa-star text-yellow-500" readonly /></h2>
                 </div>
                 <div className="blog-details mt-10">
                     <p className='text-xl font-base'>

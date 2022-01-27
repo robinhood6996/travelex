@@ -115,9 +115,9 @@ const UsersPost = () => {
                                             <button className="text-red-600 hover:text-red-900" onClick={() => deleteBlog(blog._id)}>
                                                 Delete
                                             </button> |
-                                            <button className="text-violet-600 hover:text-violet-900">
+                                            <Link to={`edit/${blog._id}`} className="text-violet-600 hover:text-violet-900" >
                                                 Update
-                                            </button>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}
