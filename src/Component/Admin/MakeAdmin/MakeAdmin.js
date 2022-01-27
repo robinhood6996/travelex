@@ -15,7 +15,7 @@ const MakeAdmin = () => {
     }
     return (
         <div className='container mx-auto py-10'>
-            <h1 className='text-center font-bold text-3xl text-violet-500'>Make Admin</h1>
+            <h1 className='text-center font-bold text-3xl text-violet-500'>Make Admi</h1>
             <div className=''>
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
