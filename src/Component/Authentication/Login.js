@@ -2,13 +2,12 @@ import React from 'react';
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-import { useState } from 'react/cjs/react.development';
-
+import { useState } from 'react';
 
 
 
 const Login = () => {
-    const { user, googleSignin, loginUser, loading } = useAuth();
+    const { googleSignin, loginUser } = useAuth();
     const location = useLocation();
     const history = useNavigate();
     const [email, setEmail] = useState('');
