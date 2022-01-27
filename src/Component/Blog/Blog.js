@@ -7,7 +7,7 @@ const Blog = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5099/blog/${id}`)
+        axios.get(`https://travelexss.herokuapp.com/blog/${id}`)
             .then(res => setBlog(res.data))
     }, [])
 

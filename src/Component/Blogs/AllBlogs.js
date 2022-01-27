@@ -33,7 +33,7 @@ const AllBlogs = () => {
     const highestPaid = activePost.filter(b => b.budget >= 400)
     const lowestCost = activePost.filter(b => b.budget < 400)
     const topRated = activePost.filter(b => parseFloat(b.rating) >= 4)
-    const lowRated = activePost.filter(b => parseFloat(b.rating) < 4)
+    const lowRated = activePost.filter(b => parseFloat(b.rating) <= 4)
 
 
 
@@ -78,7 +78,7 @@ const AllBlogs = () => {
                                     </div>
                                     <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <Link to={`blog/${blog._id}`}>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
                                             {blog.title}
                                         </Link>
@@ -115,7 +115,7 @@ const AllBlogs = () => {
                                     </div>
                                     <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <Link to={`blog/${blog._id}`}>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
                                             {blog.title}
                                         </Link>
@@ -152,7 +152,7 @@ const AllBlogs = () => {
                                     </div>
                                     <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <Link to={`blog/${blog._id}`}>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
                                             {blog.title}
                                         </Link>
@@ -189,7 +189,7 @@ const AllBlogs = () => {
                                     </div>
                                     <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <Link to={`blog/${blog._id}`}>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
                                             {blog.title}
                                         </Link>
@@ -226,7 +226,7 @@ const AllBlogs = () => {
                                     </div>
                                     <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <Link to={`blog/${blog._id}`}>
+                                        <Link to={`/blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
                                             {blog.title}
                                         </Link>
@@ -253,17 +253,7 @@ const AllBlogs = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="pagination mt-10">
-                            <h2 className='mb-2 font-bold text-violet-500'>More Blogs..</h2>
-                            {
-                                [...Array(pageCount).keys()]
-                                    .map(number => <button
-                                        className={number === page ? 'active mx-4 p-2 font-bold bg-violet-500 text-white ' : 'mx-4 p-2 font-bold bg-gray-500 text-white'}
-                                        key={number}
-                                        onClick={() => setPage(number)}
-                                    >{number + 1}</button>)
-                            }
-                        </div>
+
                     </div>
                 </div>
             </div>
