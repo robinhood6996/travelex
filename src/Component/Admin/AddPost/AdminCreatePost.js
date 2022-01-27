@@ -17,7 +17,7 @@ const AdminCreatePost = () => {
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blog = { title, location, budget, date, category, rating, description, author, image };
-        axios.post('http://localhost:5099/blogs', blog)
+        axios.post('http://localhost:5099/blogs/admin', blog)
             .then(res => {
                 if (res.data.insertedId) {
                     e.target.value = '';
@@ -57,6 +57,7 @@ const AdminCreatePost = () => {
                                                 id="title"
                                                 className="mt-1 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setTitle(e.target.value)}
+                                                required
                                             />
                                         </div>
 
@@ -70,6 +71,7 @@ const AdminCreatePost = () => {
                                                 id="location"
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setLocation(e.target.value)}
+                                                required
                                             />
                                         </div>
 
@@ -83,6 +85,7 @@ const AdminCreatePost = () => {
                                                 id="budget"
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setBudget(e.target.value)}
+                                                required
                                             />
                                         </div>
 
@@ -96,6 +99,7 @@ const AdminCreatePost = () => {
                                                 id="date"
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 onChange={e => setDate(e.target.value)}
+                                                required
                                             />
                                         </div>
 
@@ -109,10 +113,15 @@ const AdminCreatePost = () => {
                                                 autoComplete="country-name"
                                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                 onChange={e => setCategory(e.target.value)}
+                                                required
                                             >
-                                                <option>United States</option>
-                                                <option>Canada</option>
-                                                <option>Mexico</option>
+                                                <option selected value="None">Select a Category</option>
+                                                <option value="Adventure Travel">Adventure Travel</option>
+                                                <option value="Family Holidays">Family Holidays</option>
+                                                <option value="Honeymoon & Romance">Honeymoon & Romance</option>
+                                                <option value="Travel on Budget">Travel on Budget</option>
+                                                <option value="Wildlife & Nature">Wildlife & Nature</option>
+                                                <option value="Road Trips">Road Trips</option>
                                             </select>
                                         </div>
 
@@ -127,6 +136,7 @@ const AdminCreatePost = () => {
                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                                 max={5}
                                                 onChange={e => setRating(e.target.value)}
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -140,6 +150,7 @@ const AdminCreatePost = () => {
                                             id="author"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
                                             onChange={e => setAuthor(e.target.value)}
+                                            required
                                         />
                                     </div>
                                     <div>
@@ -155,6 +166,7 @@ const AdminCreatePost = () => {
                                                 placeholder="Description About Tour"
                                                 defaultValue={''}
                                                 onChange={e => setDescription(e.target.value)}
+                                                required
                                             />
                                         </div>
 
@@ -169,7 +181,7 @@ const AdminCreatePost = () => {
                                             name="image"
                                             id="image"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
-
+                                            required
                                             onChange={e => setImage(e.target.value)}
                                         />
                                     </div>

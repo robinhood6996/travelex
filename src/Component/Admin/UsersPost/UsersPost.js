@@ -6,7 +6,7 @@ const UsersPost = () => {
     const [blogs, setBlogs] = useState([]);
     const [status, setStatus] = useState();
     useEffect(() => {
-        axios.get('http://localhost:5099/blogs')
+        axios.get('http://localhost:5099/blogs/admin')
             .then(res => {
                 setBlogs(res.data);
             })
