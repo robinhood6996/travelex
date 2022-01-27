@@ -11,7 +11,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [loading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState('');
-    const [admin, setAdmin] = useState();
+    const [admin, setAdmin] = useState(false);
     const auth = getAuth();
 
     const registerUser = (username, email, password, history) => {
@@ -103,8 +103,19 @@ const useFirebase = () => {
             setIsLoading(false)
         });
         return () => unSubscribed;
-    }, [])
+    }, []);
 
+    //Check User Role
+    useEffect(() => {
+        fetch(`http://localhost:5099/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setAdmin(data.admin);
+                console.log(data.admin)
+            })
+    }, [user.email])
+
+    //Logout
     const logOut = () => {
         setIsLoading(true)
         signOut(auth).then(() => {

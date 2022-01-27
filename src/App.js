@@ -11,6 +11,7 @@ import SingleBlog from './Pages/Blog/SingleBlog';
 import Home from './Pages/Home/Home';
 import LoginPage from './Pages/Login/LoginPage';
 import SignupPage from './Pages/Signup/SignupPage';
+import AdminRoute from './PrivateRoute/AdminRoute';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 function App() {
   return (
@@ -19,11 +20,11 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<PrivateRoute><SingleBlog /></PrivateRoute>} />
+            <Route path="/blog/:id" element={<PrivateRoute><SingleBlog /></PrivateRoute>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/addpost" element={<AddPost />} />
-            <Route path="/admin" element={<AdminHome />}>
+            <Route path="/admin" element={<AdminRoute><AdminHome /></AdminRoute>}>
               <Route path="userpost" element={<UsersPost />} />
               <Route path="createblog" element={<AdminCreatePost />} />
               <Route path="makeadmin" element={<MakeAdmin />} />

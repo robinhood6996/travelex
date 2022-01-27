@@ -5,13 +5,8 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import userIcon from '../../../Images/user.png';
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 const Navigation = () => {
-    const { user, logOut } = useAuth();
+    const { user, logOut, admin } = useAuth();
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -79,6 +74,16 @@ const Navigation = () => {
                                             leaveTo="transform opacity-0 scale-95"
                                         >
                                             <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                {
+                                                    admin && <Menu.Item>
+                                                        <Link
+                                                            to="/admin"
+                                                            className='bg-gray-100 block px-4 py-2 text-sm text-gray-700'
+                                                        >
+                                                            Dashboard
+                                                        </Link>
+                                                    </Menu.Item>
+                                                }
                                                 <Menu.Item>
                                                     <Link
                                                         to="/addpost"

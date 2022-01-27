@@ -27,6 +27,7 @@ const AdminHome = () => {
                                                 <Link to="/admin/userpost" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>All Blogs</Link>
                                                 <Link to="/admin/createblog" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Create Blog</Link>
                                                 <Link to="/admin/makeadmin" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Make Admin</Link>
+                                                <Link to="/" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium block'>Home</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -60,6 +61,7 @@ const AdminHome = () => {
                                     <Link to="/admin/userpost" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium block'>All Blogs</Link>
                                     <Link to="/admin/createblog" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium block'>Create Blog</Link>
                                     <Link to="/admin/makeadmin" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium block'>Make Admin</Link>
+                                    <Link to="/" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium block'>Home</Link>
 
                                 </div>
 

@@ -1,5 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import ReactStars from "react-rating-stars-component";
+import { Link } from 'react-router-dom';
 
 const callouts = [
     {
@@ -37,6 +39,14 @@ const callouts = [
 ]
 
 const Blogs = () => {
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5099/blogs')
+            .then(res => {
+                setBlogs(res.data);
+            }).catch(err => alert(err.message))
+    }, [])
     return (
         <div className='col-span-2'>
             <div className="bg-gray-100">
@@ -45,43 +55,43 @@ const Blogs = () => {
                         <h2 className="text-2xl font-extrabold text-gray-900">Blogs</h2>
 
                         <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
-                            {callouts.map((callout) => (
-                                <div key={callout.name} className="group relative">
+                            {blogs.map((blog) => (
+                                <div key={blog._id} className="group relative">
                                     <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
                                         <img
-                                            src={callout.imageSrc}
-                                            alt={callout.imageAlt}
+                                            src={blog.image}
+                                            alt="Tour Scene"
                                             className="w-full h-full object-center object-cover"
                                         />
                                     </div>
-                                    <p className='text-sm text-gray-500'>Honeymoon & Romance</p>
+                                    <p className='text-sm text-gray-500'>{blog.category}</p>
                                     <h3 className=" text-2xl font-semibold text-gray-900 ">
-                                        <a href={callout.href}>
+                                        <Link to={`blog/${blog._id}`}>
                                             <span className="absolute inset-0" />
-                                            {callout.name}
-                                        </a>
+                                            {blog.title}
+                                        </Link>
                                     </h3>
                                     {/* <p className="text-md text-gray-800">{callout.description.slice(0, 150)}</p> */}
                                     <div className="grid grid-cols-2 gap-4 mt-4">
                                         <div className="budget">
                                             <h3 className='font-bold text-sm'>Budget</h3>
-                                            <h2 className='font-extrabold text-xl text-violet-700'>$590</h2>
+                                            <h2 className='font-extrabold text-xl text-violet-700'>${blog.budget}</h2>
                                         </div>
                                         <div className="rating">
                                             <h3 className='font-base text-sm'>Rating</h3>
                                             <h2 className='font-bold text-md text-violet-700'>
                                                 <ReactStars
-                                                    count={5}
+                                                    count={blog.rating}
                                                     size={24}
                                                     activeColor="#ffd700"
                                                 />
                                             </h2>
                                         </div>
                                         <div className='mt-3 '>
-                                            <h2 className='font-base'>Location: <span className='font-bold'>Newyork City</span></h2>
+                                            <h2 className='font-base'>Location: <span className='font-bold'>{blog.location}</span></h2>
                                         </div>
                                         <div className='mt-3 '>
-                                            <h2 className='font-base'>Author: <span className='font-bold'>Admin</span></h2>
+                                            <h2 className='font-base'>Author: <span className='font-bold'>{blog.author}</span></h2>
                                         </div>
                                     </div>
                                 </div>

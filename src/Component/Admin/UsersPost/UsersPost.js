@@ -1,18 +1,46 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const UsersPost = () => {
-    const people = [
-        {
-            name: 'Jane Cooper',
-            title: 'Regional Paradigm Technician',
-            department: 'Optimization',
-            role: 'Admin',
-            email: 'jane.cooper@example.com',
-            image:
-                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-        },
-        // More people...
-    ];
+    const [blogs, setBlogs] = useState([]);
+    const [status, setStatus] = useState();
+    useEffect(() => {
+        axios.get('http://localhost:5099/blogs')
+            .then(res => {
+                setBlogs(res.data);
+            })
+    }, [status]);
+
+    const deleteBlog = (id) => {
+        const confirm = window.confirm('Are you sure to delte this blog?');
+        if (confirm) {
+            axios.delete(`http://localhost:5099/blog/${id}`)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        alert('Your Blog Deleted!');
+                        const rest = blogs.filter(blog => blog._id !== id);
+                        setBlogs(rest);
+                    }
+                });
+        }
+    }
+
+    //Change Status 
+    const handleStatus = (id, status) => {
+        const confirm = window.confirm(`Are you sure to change it ${status} ?`);
+        if (confirm) {
+            axios.put(`http://localhost:5099/blog/status/${id}`, { status: status })
+                .then(res => {
+                    if (res.data.matchedCount) {
+                        alert('Status Changed');
+                        setStatus(status);
+                    }
+                })
+        }
+    }
+
+
     return (
         <div className="flex flex-col">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -25,7 +53,7 @@ const UsersPost = () => {
                                         scope="col"
                                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                        Name
+                                        Author
                                     </th>
                                     <th
                                         scope="col"
@@ -54,37 +82,37 @@ const UsersPost = () => {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {people.map((person) => (
-                                    <tr key={person.email}>
+                                {blogs.map((blog) => (
+                                    <tr key={blog._id}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
-                                                <div className="flex-shrink-0 h-10 w-10">
-                                                    <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
-                                                </div>
+
                                                 <div className="ml-4">
-                                                    <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                                                    <div className="text-sm text-gray-500">{person.email}</div>
+                                                    <div className="text-sm font-medium text-gray-900">{blog.author}</div>
+
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-gray-900">{person.title}</div>
-                                            <div className="text-sm text-gray-500">{person.department}</div>
+                                            <div className="text-sm text-gray-900">{blog.title}</div>
+                                            {/* <div className="text-sm text-gray-500">{person.department}</div> */}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <button className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                Active
-                                            </button>
-                                            <button className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-300 text-black">
-                                                Pending
-                                            </button>
+                                            {
+                                                blog.status === 'Pending' ? <button onClick={() => handleStatus(blog._id, 'Approved')} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-300 text-black">
+                                                    {blog.status}
+                                                </button> : <button onClick={() => handleStatus(blog._id, 'Pending')} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    {blog.status}
+                                                </button>
+
+                                            }
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25/01/2022</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blog.date}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button className="text-indigo-600 hover:text-indigo-900">
+                                            <Link to="" className="text-indigo-600 hover:text-indigo-900">
                                                 View
-                                            </button> |
-                                            <button className="text-red-600 hover:text-red-900">
+                                            </Link> |
+                                            <button className="text-red-600 hover:text-red-900" onClick={() => deleteBlog(blog._id)}>
                                                 Delete
                                             </button> |
                                             <button className="text-violet-600 hover:text-violet-900">

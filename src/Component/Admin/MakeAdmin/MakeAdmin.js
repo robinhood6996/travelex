@@ -1,13 +1,25 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 
 const MakeAdmin = () => {
+    const [email, setEmail] = useState(null);
+    const user = { email };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.put('http://localhost:5099/users/admin', user)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    alert('You made an admin! Congrats')
+                }
+            })
+    }
     return (
         <div className='container mx-auto py-10'>
             <h1 className='text-center font-bold text-3xl text-violet-500'>Make Admin</h1>
             <div className=''>
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
-                        <form action="#">
+                        <form action="#" onSubmit={handleSubmit}>
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
                                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div className="col-span-6 sm:col-span-3">
@@ -19,7 +31,7 @@ const MakeAdmin = () => {
                                             name="email"
                                             id="email"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md sm:text-sm border-gray-800 rounded-md p-2"
-
+                                            onBlur={e => setEmail(e.target.value)}
                                         />
                                     </div>
                                 </div>
