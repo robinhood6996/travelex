@@ -39,7 +39,7 @@ const Navigation = () => {
                                     <div className="flex space-x-4">
 
                                         <Link to="/" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Home</Link>
-                                        <Link to="/blog" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Blogs</Link>
+                                        <Link to="/blogs" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Blogs</Link>
                                         {
                                             user.email ? ' ' : <Link to="/login" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Login</Link>
                                         }
@@ -116,7 +116,7 @@ const Navigation = () => {
                     <Disclosure.Panel className="sm:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1">
                             <Link to="/" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Home</Link>
-                            <Link to="/blog" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Blogs</Link>
+                            <Link to="/blogs" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Blogs</Link>
                             <Link to="/login" className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'>Login</Link>
                         </div>
                     </Disclosure.Panel>

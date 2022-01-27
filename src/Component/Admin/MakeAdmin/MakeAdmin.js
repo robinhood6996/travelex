@@ -6,7 +6,7 @@ const MakeAdmin = () => {
     const user = { email };
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put('http://localhost:5099/users/admin', user)
+        axios.put('https://travelexss.herokuapp.com/users/admin', user)
             .then(res => {
                 if (res.data.modifiedCount) {
                     alert('You made an admin! Congrats')

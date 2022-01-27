@@ -22,7 +22,7 @@ const UpdatePost = () => {
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blog = { title, location, budget, date, category, rating, description, author, image };
-        axios.put(`http://localhost:5099/blog/update/${id}`, blog)
+        axios.put(`https://travelexss.herokuapp.com/blog/update/${id}`, blog)
             .then(res => {
                 if (res.data.matchedCount) {
                     e.target.value = '';
@@ -39,7 +39,7 @@ const UpdatePost = () => {
 
     }
     useEffect(() => {
-        axios.get(`http://localhost:5099/blog/${id}`)
+        axios.get(`https://travelexss.herokuapp.com/blog/${id}`)
             .then(res => setBlog(res.data))
     }, [])
     if (loading) {

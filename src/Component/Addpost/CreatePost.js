@@ -16,7 +16,7 @@ const CreatePost = () => {
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blog = { title, location, budget, date, category, rating, description, author, image };
-        axios.post('http://localhost:5099/blogs', blog)
+        axios.post('https://travelexss.herokuapp.com/blogs', blog)
             .then(res => {
                 if (res.data.insertedId) {
                     e.target.value = '';

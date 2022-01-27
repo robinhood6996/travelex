@@ -6,7 +6,7 @@ const UsersPost = () => {
     const [blogs, setBlogs] = useState([]);
     const [status, setStatus] = useState();
     useEffect(() => {
-        axios.get('http://localhost:5099/blogs/admin')
+        axios.get('https://travelexss.herokuapp.com/blogs/admin')
             .then(res => {
                 setBlogs(res.data);
             })
@@ -15,7 +15,7 @@ const UsersPost = () => {
     const deleteBlog = (id) => {
         const confirm = window.confirm('Are you sure to delte this blog?');
         if (confirm) {
-            axios.delete(`http://localhost:5099/blog/${id}`)
+            axios.delete(`https://travelexss.herokuapp.com/blog/${id}`)
                 .then(res => {
                     if (res.data.deletedCount) {
                         alert('Your Blog Deleted!');
@@ -30,7 +30,7 @@ const UsersPost = () => {
     const handleStatus = (id, status) => {
         const confirm = window.confirm(`Are you sure to change it ${status} ?`);
         if (confirm) {
-            axios.put(`http://localhost:5099/blog/status/${id}`, { status: status })
+            axios.put(`https://travelexss.herokuapp.com/blog/status/${id}`, { status: status })
                 .then(res => {
                     if (res.data.matchedCount) {
                         alert('Status Changed');

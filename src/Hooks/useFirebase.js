@@ -108,7 +108,7 @@ const useFirebase = () => {
 
     //Check User Role
     useEffect(() => {
-        fetch(`http://localhost:5099/users/${user.email}`)
+        fetch(`https://travelexss.herokuapp.com/users/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin);
@@ -128,7 +128,7 @@ const useFirebase = () => {
 
     const saveUser = (displayName, email, method) => {
         const user = { name: displayName, email: email }
-        fetch('http://localhost:5099/users', {
+        fetch('https://travelexss.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'

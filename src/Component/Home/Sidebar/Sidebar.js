@@ -4,7 +4,7 @@ import axios from 'axios';
 const Sidebar = () => {
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5099/blogs/admin')
+        axios.get('https://travelexss.herokuapp.com/blogs/admin')
             .then(res => {
                 setBlogs(res.data);
             })

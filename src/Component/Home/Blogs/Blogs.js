@@ -12,7 +12,7 @@ const Blogs = () => {
     const activePost = blogs.filter(blog => blog.status !== 'Pending')
 
     useEffect(() => {
-        axios.get(`http://localhost:5099/blogs?page=${page}&&size=${size}`)
+        axios.get(`https://travelexss.herokuapp.com/blogs?page=${page}&&size=${size}`)
             .then(res => {
                 setBlogs(res.data.blogs)
                 const count = res.data.count
